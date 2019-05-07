@@ -12,5 +12,7 @@ public interface InterfaceCargoDao {
 	
 	void delete(Long id);
 	
+	Cargo findById(Long id);
+	
 	List<Cargo> findAll();
 }

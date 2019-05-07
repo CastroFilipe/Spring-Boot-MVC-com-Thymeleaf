@@ -12,5 +12,7 @@ public interface InterfaceDepartamentoDao {
 	
 	void delete(Long id);
 	
+	Departamento findById(Long id);
+	
 	List<Departamento> findAll();
 }

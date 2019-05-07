@@ -12,5 +12,7 @@ public interface InterfaceFuncionarioDao {
 	
 	void delete(Long id);
 	
+	Funcionario findById(Long id);
+	
 	List<Funcionario> findAll();
 }
