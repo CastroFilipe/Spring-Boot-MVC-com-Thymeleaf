@@ -19,6 +19,14 @@ public class Departamento extends AbstractEntity<Long> {
 	@OneToMany(mappedBy = "departamento")
 	private List<Cargo> listaDeCargos;
 
+	public List<Cargo> getListaDeCargos() {
+		return listaDeCargos;
+	}
+
+	public void setListaDeCargos(List<Cargo> listaDeCargos) {
+		this.listaDeCargos = listaDeCargos;
+	}
+
 	public String getNome() {
 		return nome;
 	}

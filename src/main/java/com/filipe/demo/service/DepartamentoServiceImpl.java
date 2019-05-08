@@ -40,4 +40,13 @@ public class DepartamentoServiceImpl implements InterfaceDepartamentoService{
 		return dao.findAll();
 	}
 
+	@Override
+	public boolean departamentoTemCargos(Long id) {
+		if(buscarPorId(id).getListaDeCargos().isEmpty()) {
+			return false;
+		}
+		
+		return true;
+	}
+
 }

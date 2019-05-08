@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.filipe.demo.domain.Departamento;
 import com.filipe.demo.service.InterfaceDepartamentoService;
@@ -20,30 +21,44 @@ public class DepartamentoController {
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Departamento departamento) {
-		return "departamento/cadastro";
+		return "/departamento/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		model.addAttribute("departamentos", service.buscarTodos());
-		return "departamento/lista";
+		return "/departamento/lista";
 	}
 	
-	@PostMapping("/savar")
-	public String salvar(Departamento departamento) {
+	@PostMapping("/salvar")
+	public String salvar(Departamento departamento, RedirectAttributes attr) {
 		service.salvar(departamento);
+		attr.addFlashAttribute("success", "Departamento inserido com sucesso");
 		return "redirect:/departamentos/cadastrar"; //após o cadastro será direcionado para a propria página de cadastro.
 	}
 	
-	@GetMapping("editar/{id}")
+	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("departamento", service.buscarPorId(id));
 		return "/departamento/cadastro";
 	}
 	
-	@PostMapping("editar")
-	public String editar(Departamento departamento) {
+	@PostMapping("/editar")
+	public String editar(Departamento departamento, RedirectAttributes attr) {
 		service.editar(departamento);
+		attr.addFlashAttribute("success", "Departamento editado com sucesso");
 		return "redirect:/departamentos/cadastrar";
+	}
+	
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, ModelMap model) {
+		if(service.departamentoTemCargos(id)) {
+			model.addAttribute("fail", "Departamento não removido. Possui cargos vinculados.");
+		} else {
+			service.excluir(id);
+			model.addAttribute("fail", "Departamento excluido com sucesso");
+		}
+		
+		return listar(model);//chama o metodo listar dessa propria classe. O resultado é o mesmo de "redirect:/departamentos/listar"
 	}
 }
