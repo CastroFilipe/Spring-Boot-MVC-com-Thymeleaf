@@ -14,4 +14,6 @@ public interface InterfaceCargoService {
 	Cargo buscarPorId(Long id);
 	
 	List<Cargo> buscarTodos();
+
+	boolean cargoTemFuncionarios(Long id);
 }

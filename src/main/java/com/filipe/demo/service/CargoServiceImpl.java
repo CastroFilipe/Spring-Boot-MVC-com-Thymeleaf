@@ -42,4 +42,14 @@ public class CargoServiceImpl implements InterfaceCargoService {
 	public List<Cargo> buscarTodos() {
 		return dao.findAll();
 	}
+
+	@Override
+	public boolean cargoTemFuncionarios(Long id) {	
+
+		if(buscarPorId(id).getListaDeFuncionarios().isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}		
+	}
 }

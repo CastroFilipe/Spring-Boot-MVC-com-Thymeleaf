@@ -56,7 +56,7 @@ public class DepartamentoController {
 			model.addAttribute("fail", "Departamento não removido. Possui cargos vinculados.");
 		} else {
 			service.excluir(id);
-			model.addAttribute("fail", "Departamento excluido com sucesso");
+			model.addAttribute("success", "Departamento excluido com sucesso");
 		}
 		
 		return listar(model);//chama o metodo listar dessa propria classe. O resultado é o mesmo de "redirect:/departamentos/listar"
