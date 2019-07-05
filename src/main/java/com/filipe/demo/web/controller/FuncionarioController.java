@@ -33,7 +33,7 @@ public class FuncionarioController {
 	
 	@GetMapping("/listar")
 	public String listar() {
-		return "funcionario/lista";
+		return "/funcionario/lista";
 	}
 	
 	@PostMapping("/salvar")

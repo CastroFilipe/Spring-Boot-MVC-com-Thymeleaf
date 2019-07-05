@@ -55,9 +55,5 @@ public abstract class AbstractEntity<ID extends Serializable> implements Seriali
 	public String toString() {
 		return "id=" + id;
 	}
-	
-	
-	
-	
-	
+
 }
